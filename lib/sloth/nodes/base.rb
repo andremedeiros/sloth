@@ -1,6 +1,6 @@
 module Sloth
   module Nodes
-    class ProgramNode < ScopeNode
+    class Base
     end
   end
 end

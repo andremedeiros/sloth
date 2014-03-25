@@ -1,7 +1,7 @@
 module Sloth
   module Adapters
-    module Rubinius
-      def self.translate(code)
+    class Rubinius
+      def self.translate(src)
         raise NotImplementedError
       end
     end

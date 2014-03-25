@@ -2,71 +2,75 @@ require 'ripper'
 
 module Sloth
   module Adapters
-    module Ruby
-      def self.translate(code)
-        sexp = Ripper.sexp code
-
-        build_ast sexp
+    class Ruby < Ripper::SexpBuilderPP
+      def self.translate(src)
+        new(src).parse
       end
 
-      def self.build_ast(sexp)
-        case sexp[0]
-        when :program then
-          children = sexp[1].map { |c| build_ast(c) }
-          Sloth::Nodes::ProgramNode.new children
+      def on_program(children)
+        Nodes::Program.new(children)
+      end
 
-        when :command then
-          identifier = build_ast(sexp[1])
+      def on_command(identifier, arguments)
+        Nodes::Command.new(identifier, arguments)
+      end
 
-          arguments_block = sexp[2]
-          arguments = arguments_block[1].map { |a| build_ast(a) }
+      def on_ident(name)
+        Nodes::Identifier.new(name)
+      end
 
-          Sloth::Nodes::CommandNode.new identifier, arguments
+      def on_string_literal(sexp)
+        Nodes::String.new(sexp[1])
+      end
 
-        when :string_literal then
-          content = sexp[1][1][1]
-          Sloth::Nodes::StringLiteralNode.new content
+      def on_def(identifier, arguments, body)
+        Nodes::Method.new(identifier, arguments, body)
+      end
 
-        when :def then
-          identifier = build_ast(sexp[1])
+      def on_params(required_parameters, optional_parameters, *wat)
+        required_parameters ||= []
+        optional_parameters ||= []
 
-          params_block = sexp[2]
-          params_block = params_block[1] if params_block[0] == :paren
+        parameters = required_parameters + optional_parameters
 
-          params = ((params_block[1] || []) + (params_block[2] || [])).map do |param|
-            param = [param] unless param[0].is_a? Array
-
-            param_identifier = build_ast(param[0])
-            param_default    = build_ast(param[1]) if param[1]
-
-            Sloth::Nodes::ParameterNode.new param_identifier, param_default
-          end
-
-          children = sexp[3][1].map { |c| build_ast(c) }
-          Sloth::Nodes::MethodNode.new identifier, params, children
-
-        when :@ident, :@const, :@kw then
-          type = case sexp[0]
-          when :@ident then :identifier
-          when :@kw    then :keyword
-          when :@const then :constant
-          end
-          Sloth::Nodes::IdentifierNode.new sexp[1], type
-
-        when :var_ref, :const_ref then
-          identifier = build_ast(sexp[1])
-
-          Sloth::Nodes::ReferenceNode.new identifier
-
-        when :class then
-          identifier = build_ast(sexp[1])
-          ancestor_identifier = build_ast(sexp[2]) if sexp[2]
-          children = sexp[3][1].map { |c| build_ast(c) }
-
-          Sloth::Nodes::ClassNode.new identifier, ancestor_identifier, children
-
-        else raise Sloth::Nodes::NodeNotFoundError, sexp[0]
+        parameters.map do |(identifier, value)|
+          Nodes::Parameter.new(identifier, value)
         end
+      end
+
+      def on_var_ref(reference)
+        variable, type = reference
+        Nodes::Reference.new(variable, type)
+      end
+      alias_method :on_const_ref, :on_var_ref
+
+      def on_bodystmt(children, *wat)
+        children
+      end
+
+      def on_kw(keyword)
+        [keyword, :keyword]
+      end
+
+      def on_const(constant)
+        [constant, :constant]
+      end
+
+      def on_class(identifier, parent_identifier, children)
+        Nodes::ClassDefinition.new(identifier, parent_identifier, children)
+      end
+
+      # TODO: Make these a helper that defines the methods.
+      def on_tstring_content(string)
+        string
+      end
+
+      def on_paren(contents)
+        contents
+      end
+
+      def on_args_add_block(arguments, wat)
+        arguments
       end
     end
   end

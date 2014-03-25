@@ -12,15 +12,11 @@ describe humanize_spec(__FILE__) do
   let(:command)  { program.children.first }
 
   it 'should return an instance of Sloth::Nodes::Program' do
-    expect( program ).to be_a(Sloth::Nodes::ProgramNode)
+    expect( program ).to be_a(Sloth::Nodes::Program)
   end
 
   it 'should contain an instance of Sloth::Nodes::Command' do
-    expect( command.identifier.value ).to eq('require')
-  end
-
-  it 'the command node should have the program node as its parent' do
-    expect( command.parent ).to eq(program)
+    expect( command.identifier.name ).to eq('require')
   end
 
   it "the command's arguments should contain one element" do
@@ -29,7 +25,7 @@ describe humanize_spec(__FILE__) do
 
   it 'should contain an argument of type Sloth::Nodes::StringLiteral' do
     argument = command.arguments.first
-    expect( argument ).to be_a(Sloth::Nodes::StringLiteralNode)
-    expect( argument.content ).to eq('sloth')
+    expect( argument ).to be_a(Sloth::Nodes::String)
+    expect( argument.value ).to eq('sloth')
   end
 end

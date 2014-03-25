@@ -14,7 +14,7 @@ describe humanize_spec(__FILE__) do
   let(:argument) { method.arguments.first }
 
   it 'should contain an instance of Sloth::Nodes::Method' do
-    expect( method.identifier.value ).to eq('sloth')
+    expect( method.identifier.name ).to eq('sloth')
   end
 
   it 'should contain the correct number of arguments' do
@@ -22,18 +22,18 @@ describe humanize_spec(__FILE__) do
   end
 
   it 'the argument should have the correct name' do
-    expect( argument.identifier.value ).to eq('slothy')
+    expect( argument.identifier.name ).to eq('slothy')
   end
 
   it 'the argument should have the correct default value' do
-    expect( argument.default ).to be_a(Sloth::Nodes::ReferenceNode)
+    expect( argument.default ).to be_a(Sloth::Nodes::Reference)
   end
 
   it 'the argument should report itself as being a keyword' do
     expect( argument.default.keyword? ).to be_true
   end
 
-  it 'should contain an instance of Sloth::Nodes::VariableReference' do
-    expect( method.children.first ).to be_a(Sloth::Nodes::ReferenceNode)
+  it 'should contain an instance of Sloth::Nodes::Reference' do
+    expect( method.children.first ).to be_a(Sloth::Nodes::Reference)
   end
 end

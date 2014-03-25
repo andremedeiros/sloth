@@ -1,7 +1,8 @@
 module Sloth
   module Nodes
-    class CommandNode < BaseNode
-      attr_accessor :identifier, :arguments
+    class Command < Base
+      attr_reader :identifier
+      attr_reader :arguments
 
       def initialize(identifier, arguments)
         @identifier = identifier
