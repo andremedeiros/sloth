@@ -57,7 +57,7 @@ module Sloth
       end
 
       def on_class(identifier, parent_identifier, children)
-        Nodes::ClassDefinition.new(identifier, parent_identifier, children)
+        Nodes::Klass.new(identifier, parent_identifier, children)
       end
 
       # TODO: Make these a helper that defines the methods.

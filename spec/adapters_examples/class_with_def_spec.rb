@@ -15,7 +15,7 @@ describe humanize_spec(__FILE__) do
   let(:klass)   { program.children.first }
 
   it 'should contain an instance of Sloth::Nodes::ClassNode' do
-    expect( klass ).to be_a(Sloth::Nodes::ClassDefinition)
+    expect( klass ).to be_a(Sloth::Nodes::Klass)
     expect( klass.identifier.name ).to eq('Shizzle')
   end
 

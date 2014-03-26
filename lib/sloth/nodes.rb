@@ -1,9 +1,9 @@
 module Sloth
   module Nodes
     autoload :Base,            "sloth/nodes/base"
-    autoload :ClassDefinition, "sloth/nodes/class_definition"
     autoload :Command,         "sloth/nodes/command"
     autoload :Identifier,      "sloth/nodes/identifier"
+    autoload :Klass,           "sloth/nodes/klass"
     autoload :Method,          "sloth/nodes/method"
     autoload :Parameter,       "sloth/nodes/parameter"
     autoload :Program,         "sloth/nodes/program"

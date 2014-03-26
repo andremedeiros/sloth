@@ -1,6 +1,6 @@
 module Sloth
   module Nodes
-    class ClassDefinition < Base
+    class Klass < Base
       attr_reader :identifier
       attr_reader :super_identifier
       attr_reader :children
