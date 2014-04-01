@@ -1,11 +1,14 @@
 module Sloth
   module Nodes
-    class Method < Command
-      attr_reader :children
+    class Method < Scope
+      attr_reader :identifier
+      attr_reader :arguments
 
       def initialize(identifier, arguments, children)
-        super(identifier, arguments)
-        @children = children
+        super children
+
+        @identifier = identifier
+        @arguments  = arguments
       end
     end
   end

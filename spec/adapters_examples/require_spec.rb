@@ -19,6 +19,10 @@ describe humanize_spec(__FILE__) do
     expect( command.identifier.name ).to eq('require')
   end
 
+  it "the command should have the program as parent" do
+    expect( command.parent ).to eq(program)
+  end
+
   it "the command's arguments should contain one element" do
     expect( command.arguments.length ).to eq(1)
   end
