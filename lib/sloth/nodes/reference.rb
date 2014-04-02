@@ -12,6 +12,10 @@ module Sloth
       def keyword?
         @type == :keyword
       end
+
+      def constant?
+        @type == :constant
+      end
     end
   end
 end

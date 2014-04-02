@@ -20,6 +20,6 @@ describe Sloth::Adapters do
       end
     end
 
-    after { described_class.remove_instance_variable :@adapter }
+    after { described_class.instance_variable_set :@adapter, nil }
   end
 end
