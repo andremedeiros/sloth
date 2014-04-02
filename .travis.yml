@@ -8,3 +8,7 @@ rvm:
 env:
   matrix:
     secure: broNy0H5kw79xObhkjgk8D5plLECRpj3d+JMGM0HSZDmrQ43p7FN9Ofmg1vl0khOop6GH8XRdNuI2M6P6Gw9gniPSLtIVTDwWLlrVwpP1Uxp7X85uztduC+zBrpoUuRsxqDFwejblML9GUFJtZOC1yNLZsCGSSZPINtLIalaL/I=
+matrix:
+  fast_finish: true
+  allow_failures:
+    - rvm: rbx
