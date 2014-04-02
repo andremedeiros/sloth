@@ -11,11 +11,11 @@ end
 RUBY
 
 describe humanize_spec(__FILE__) do
-  let(:program) { Sloth::Adapters.adapter.translate code }
+  let(:program) { Adapters.adapter.translate code }
   let(:klass)   { program.children.first }
 
   it 'should contain an instance of Sloth::Nodes::ClassNode' do
-    expect( klass ).to be_a(Sloth::Nodes::Klass)
+    expect( klass ).to be_a(Nodes::Klass)
     expect( klass.identifier.name ).to eq('Shizzle')
   end
 

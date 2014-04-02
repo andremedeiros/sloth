@@ -1,11 +1,11 @@
-# require 'spec_helper'
+require 'spec_helper'
 
-# describe Sloth::Adapters::Ruby do
-#   describe '#translate' do
-#     let(:program)  { described_class.translate 'require "sloth"' }
+describe Adapters::Ruby do
+  describe '#translate' do
+    let(:program)  { described_class.translate 'require "sloth"' }
 
-#     it 'should return an instance of Sloth::Nodes::ProgramNode' do
-#       expect( program ).to be_a(Sloth::Nodes::ProgramNode)
-#     end
-#   end
-# end
+    it 'should return an instance of Nodes::Program' do
+      expect( program ).to be_a(Nodes::Program)
+    end
+  end
+end

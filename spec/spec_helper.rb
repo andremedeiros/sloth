@@ -10,3 +10,6 @@ def humanize_spec(file)
   base_name = File.basename(file, '_spec.rb')
   "Code test: #{ base_name.tr('_', ' ') }"
 end
+
+# Simplify namespaces
+include Sloth

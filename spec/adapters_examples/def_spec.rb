@@ -9,7 +9,7 @@ end
 RUBY
 
 describe humanize_spec(__FILE__) do
-  let(:program)  { Sloth::Adapters.adapter.translate code }
+  let(:program)  { Adapters.adapter.translate code }
   let(:method)   { program.children.first }
   let(:argument) { method.arguments.first }
 
@@ -26,7 +26,7 @@ describe humanize_spec(__FILE__) do
   end
 
   it 'the argument should have the correct default value' do
-    expect( argument.default ).to be_a(Sloth::Nodes::Reference)
+    expect( argument.default ).to be_a(Nodes::Reference)
   end
 
   it 'the argument should report itself as being a keyword' do
@@ -34,6 +34,6 @@ describe humanize_spec(__FILE__) do
   end
 
   it 'should contain an instance of Sloth::Nodes::Reference' do
-    expect( method.children.first ).to be_a(Sloth::Nodes::Reference)
+    expect( method.children.first ).to be_a(Nodes::Reference)
   end
 end

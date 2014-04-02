@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Sloth::Adapters do
+describe Adapters do
   describe '.adapter' do
     before { stub_const "RUBY_ENGINE", engine }
 
@@ -8,7 +8,7 @@ describe Sloth::Adapters do
       let(:engine) { 'ruby' }
 
       it 'should return the correct adapter' do
-        expect( described_class.adapter ).to eq(Sloth::Adapters::Ruby)
+        expect( described_class.adapter ).to eq(Adapters::Ruby)
       end
     end
 
@@ -16,7 +16,7 @@ describe Sloth::Adapters do
       let(:engine) { 'rbx' }
 
       it 'should return the correct adapter' do
-        expect( described_class.adapter ).to eq(Sloth::Adapters::Rubinius)
+        expect( described_class.adapter ).to eq(Adapters::Rubinius)
       end
     end
 
@@ -25,7 +25,7 @@ describe Sloth::Adapters do
 
       it 'should raise an exception' do
         expect { described_class.adapter }
-          .to raise_error(Sloth::Adapters::AdapterNotFoundError)
+          .to raise_error(Adapters::AdapterNotFoundError)
       end
     end
 

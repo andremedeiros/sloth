@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Sloth::Nodes::Reference do
+describe Nodes::Reference do
   [:keyword, :constant].each do |type|
     describe "##{ type }?" do
       it "should return true when a #{ type } is referenced" do

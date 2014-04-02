@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Sloth::Adapters::Rubinius do
+describe Adapters::Rubinius do
   describe '.translate' do
     it 'should not be implemented' do
       expect{ described_class.translate '' }.to raise_error(NotImplementedError)
