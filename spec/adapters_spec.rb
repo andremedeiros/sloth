@@ -20,6 +20,15 @@ describe Sloth::Adapters do
       end
     end
 
+    context 'with an unsupported engine' do
+      let(:engine) { 'unsupported' }
+
+      it 'should raise an exception' do
+        expect { described_class.adapter }
+          .to raise_error(Sloth::Adapters::AdapterNotFoundError)
+      end
+    end
+
     after { described_class.instance_variable_set :@adapter, nil }
   end
 end
