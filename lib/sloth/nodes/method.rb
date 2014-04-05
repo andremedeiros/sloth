@@ -2,13 +2,13 @@ module Sloth
   module Nodes
     class Method < Scope
       attr_reader :identifier
-      attr_reader :arguments
+      attr_reader :parameters
 
-      def initialize(identifier, arguments, children)
+      def initialize(identifier, parameters, children)
         super children
 
         @identifier = identifier
-        @arguments  = arguments
+        @parameters = parameters
       end
     end
   end

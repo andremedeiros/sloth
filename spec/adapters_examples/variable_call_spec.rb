@@ -17,11 +17,11 @@ describe humanize_spec(__FILE__) do
       expect( assignment ).to be_a(Nodes::Assignment)
     end
 
-    it 'should have the right identifier' do
+    it 'should have the correct identifier' do
       expect( assignment.identifier.name ).to eq('some_string')
     end
 
-    it 'should have the right value' do
+    it 'should have the correct value' do
       expect( assignment.value.value ).to eq('Hello world')
     end
   end
