@@ -1,19 +1,19 @@
 module Sloth
   class Scope
-    def initialize
-      @stack = [{}]
+    def initialize(stack = {})
+      @stacks = [stack]
     end
 
     def push
-      @stack.unshift({})
+      @stacks.unshift({})
     end
 
     def pop
-      @stack.shift
+      @stacks.shift
     end
 
     def get(identifier)
-      @stack.each do |stack|
+      @stacks.each do |stack|
         next unless stack.has_key? identifier
         return stack[identifier]
       end
@@ -22,12 +22,26 @@ module Sloth
     end
 
     def set(identifier, value)
-      @stack.each do |stack|
+      @stacks.each do |stack|
         next unless stack.has_key? identifier
         return stack[identifier] = value
       end
 
-      @stack.first[identifier] = value
+      @stacks.first[identifier] = value
+    end
+
+    def complete
+      Scope.new(to_h)
+    end
+
+    def current
+      Scope.new(@stacks.first)
+    end
+
+    def to_h
+      ({}).tap do |result|
+        @stacks.each { |stack| result.merge!(stack) }
+      end
     end
   end
 end

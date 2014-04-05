@@ -16,6 +16,10 @@ module Sloth
       def constant?
         @type == :constant
       end
+
+      def variable?
+        @type == :variable
+      end
     end
   end
 end

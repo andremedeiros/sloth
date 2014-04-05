@@ -6,7 +6,7 @@ require "sloth"
 
 RUBY
 
-describe humanize_spec(__FILE__) do
+describe humanize_code_spec(__FILE__) do
   let(:program)  { Adapters.adapter.translate code }
   let(:command)  { program.children.first }
 

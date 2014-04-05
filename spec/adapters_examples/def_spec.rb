@@ -8,9 +8,9 @@ end
 
 RUBY
 
-describe humanize_spec(__FILE__) do
-  let(:program)  { Adapters.adapter.translate code }
-  let(:method)   { program.children.first }
+describe humanize_code_spec(__FILE__) do
+  let(:program) { Adapters.adapter.translate code }
+  let(:method)  { program.children.first }
 
   context 'the method' do
     it 'should be an instance of Sloth::Nodes::Method' do

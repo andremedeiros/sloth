@@ -2,6 +2,7 @@ require "sloth/version"
 
 module Sloth
   autoload :Adapters, "sloth/adapters"
+  autoload :Checks,   "sloth/checks"
   autoload :Nodes,    "sloth/nodes"
   autoload :Scope,    "sloth/scope"
 

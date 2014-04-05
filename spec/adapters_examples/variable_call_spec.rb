@@ -7,9 +7,9 @@ puts some_string
 
 RUBY
 
-describe humanize_spec(__FILE__) do
-  let(:program)  { Adapters.adapter.translate code }
-  let(:code)     { 'require "sloth"' }
+describe humanize_code_spec(__FILE__) do
+  let(:program) { Adapters.adapter.translate code }
+  let(:code)    { 'require "sloth"' }
 
   context 'the assignment' do
     let(:assignment) { program.children.first }

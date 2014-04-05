@@ -40,6 +40,7 @@ module Sloth
 
       def on_var_ref(reference)
         identifier, type = reference
+        type ||= :variable
         Nodes::Reference.new(identifier, type)
       end
       alias_method :on_const_ref, :on_var_ref

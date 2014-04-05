@@ -56,4 +56,22 @@ describe Scope do
       end
     end
   end
+
+  describe '#complete' do
+    let(:complete_scope) { scope.complete }
+
+    it 'should return the correct information' do
+      expect( complete_scope.get(:something) ).to eq(1)
+      expect( complete_scope.get(:something_else) ).to eq(2)
+    end
+  end
+
+  describe '#current' do
+    let(:current_scope) { scope.current }
+
+    it 'should return the correct information' do
+      expect( current_scope.get(:something) ).to be_nil
+      expect( current_scope.get(:something_else) ).to eq(2)
+    end
+  end
 end
