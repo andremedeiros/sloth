@@ -2,7 +2,7 @@ require 'spec_helper'
 
 code = <<-RUBY
 
-class Shizzle < Nizzle
+class Child < Super
   def sloth(slothy)
     true
   end
@@ -16,15 +16,39 @@ describe humanize_spec(__FILE__) do
 
   it 'should contain an instance of Sloth::Nodes::ClassNode' do
     expect( klass ).to be_a(Nodes::Klass)
-    expect( klass.identifier.name ).to eq('Shizzle')
   end
 
-  it' should contain the right references on the class' do
-    expect( klass.identifier.name ).to eq('Shizzle')
-    expect( klass.super_identifier.name ).to eq('Nizzle')
+  context 'the identifier reference' do
+    let(:identifier_ref) { klass.identifier_ref }
+    let(:identifier)     { identifier_ref.identifier }
+
+    it 'should be an instance of Nodes::Sloth::Reference' do
+      expect( identifier_ref ).to be_a(Nodes::Reference)
+    end
+
+    it 'should contain an identifier' do
+      expect( identifier ).to be_a(Nodes::Identifier)
+    end
+
+    it 'should contain the correct name' do
+      expect( identifier.name ).to eq('Child')
+    end
   end
 
-  it 'should contain one method node' do
-    expect( klass.children.length ).to eq(1)
+  context 'the super identifier reference' do
+    let(:super_identifier_ref) { klass.super_identifier_ref }
+    let(:super_identifier)     { super_identifier_ref.identifier }
+
+    it 'should be an instance of Nodes::Sloth::Reference' do
+      expect( super_identifier_ref ).to be_a(Nodes::Reference)
+    end
+
+    it 'should contain an identifier' do
+      expect( super_identifier ).to be_a(Nodes::Identifier)
+    end
+
+    it 'should contain the correct name' do
+      expect( super_identifier.name ).to eq('Super')
+    end
   end
 end

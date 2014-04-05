@@ -1,11 +1,11 @@
 module Sloth
   module Nodes
     class Reference < Base
-      attr_reader :name
+      attr_reader :identifier
       attr_reader :type
 
-      def initialize(name, type)
-        @name = name
+      def initialize(identifier, type)
+        @identifier = identifier
         @type = type
       end
 

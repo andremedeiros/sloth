@@ -5,6 +5,7 @@ module Sloth
     autoload :Scope, "sloth/nodes/scope"
 
     # Node classes
+    autoload :Assignment, "sloth/nodes/assignment"
     autoload :Command,    "sloth/nodes/command"
     autoload :Identifier, "sloth/nodes/identifier"
     autoload :Klass,      "sloth/nodes/klass"

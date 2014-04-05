@@ -39,8 +39,8 @@ module Sloth
       end
 
       def on_var_ref(reference)
-        variable, type = reference
-        Nodes::Reference.new(variable, type)
+        identifier, type = reference
+        Nodes::Reference.new(identifier, type)
       end
       alias_method :on_const_ref, :on_var_ref
 
@@ -49,20 +49,28 @@ module Sloth
       end
 
       def on_kw(keyword)
-        [keyword, :keyword]
+        [Nodes::Identifier.new(keyword), :keyword]
       end
 
       def on_const(constant)
-        [constant, :constant]
+        [Nodes::Identifier.new(constant), :keyword]
       end
 
-      def on_class(identifier, parent_identifier, children)
-        Nodes::Klass.new(identifier, parent_identifier, children)
+      def on_class(identifier_ref, super_identifier_ref, children)
+        Nodes::Klass.new(identifier_ref, super_identifier_ref, children)
+      end
+
+      def on_assign(identifier, value)
+        Nodes::Assignment.new(identifier, value)
       end
 
       # TODO: Make these a helper that defines the methods.
       def on_tstring_content(string)
         string
+      end
+
+      def on_var_field(var)
+        var
       end
 
       def on_paren(contents)
