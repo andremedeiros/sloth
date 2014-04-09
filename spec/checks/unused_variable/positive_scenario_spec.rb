@@ -5,6 +5,11 @@ code = <<-RUBY
 greeting = "Hello world!"
 puts greeting
 
+def something_else
+  greeting = "Foo"
+  puts greeting
+end
+
 RUBY
 
 describe humanize_checker_spec(__FILE__) do
